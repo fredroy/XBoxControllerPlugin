@@ -1,0 +1,19 @@
+<Node name="root">
+
+	<RequiredPlugin pluginName="XBoxControllerPlugin" />
+    <VisualStyle displayFlags="showVisual" />
+
+	<Node name="Cube">
+		<MeshObjLoader name="loader" filename="mesh/cube.obj"/>
+		<MechanicalObject name="DOFs" src="@loader" />
+		<TriangleSetTopologyContainer src="@loader" />
+
+		<XBoxControllerDriver id="0" printLog="false" name="xboxDriver"/>
+		<PythonScriptController filename="CubeController.py" classname="CubeController" listening="true"/>
+
+		<Node name="Visu">
+			<OglModel />
+			<IdentityMapping />
+		</Node>
+	</Node>
+</Node>
