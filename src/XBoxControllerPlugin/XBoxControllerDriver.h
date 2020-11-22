@@ -1,7 +1,7 @@
 #ifndef XBOXCONTROLLERDRIVER_H
 #define XBOXCONTROLLERDRIVER_H
 
-#include <XBoxControllerPlugin.h>
+#include <XBoxControllerPlugin/config.h>
 
 #include <sofa/core/objectmodel/BaseObject.h>
 #include <sofa/helper/system/FileRepository.h>

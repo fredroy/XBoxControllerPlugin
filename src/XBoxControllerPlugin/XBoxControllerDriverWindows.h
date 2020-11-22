@@ -1,7 +1,7 @@
 #ifndef XBOXCONTROLLERDRIVERWINDOWS_H
 #define XBOXCONTROLLERDRIVERWINDOWS_H
 
-#include <XBoxControllerDriver.h>
+#include <XBoxControllerPlugin/XBoxControllerDriver.h>
 
 #define WIN32_LEAN_AND_MEAN //reduce windows useless includes
 

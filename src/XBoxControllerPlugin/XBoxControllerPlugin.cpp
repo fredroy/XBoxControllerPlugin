@@ -1,4 +1,5 @@
-#include "XBoxControllerPlugin.h"
+
+#include <XBoxControllerPlugin/config.h>
 
 #include <iostream>
 

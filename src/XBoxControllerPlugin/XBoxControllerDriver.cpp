@@ -1,9 +1,9 @@
-#include <XBoxControllerDriver.h>
+#include <XBoxControllerPlugin/XBoxControllerDriver.h>
 
 #include <sofa/core/ObjectFactory.h>
 #include <sofa/simulation/AnimateBeginEvent.h>
 
-#include <XBoxControllerDriverWindows.h>
+#include <XBoxControllerPlugin/XBoxControllerDriverWindows.h>
 
 namespace sofa
 {
