@@ -1,5 +1,4 @@
-#ifndef XBOXCONTROLLERDRIVER_H
-#define XBOXCONTROLLERDRIVER_H
+#pragma once
 
 #include <XBoxControllerPlugin/config.h>
 
@@ -7,13 +6,7 @@
 #include <sofa/helper/system/FileRepository.h>
 
 
-namespace sofa
-{
-
-namespace component
-{
-
-namespace controller
+namespace sofa::component::controller
 {
 
 class AbstractXBoxControllerDriver
@@ -91,10 +84,4 @@ private:
 
 };
 
-} // namespace controller
-
-} // namespace component
-
-} // namespace sofa
-
-#endif // XBOXCONTROLLERDRIVER_H
+} // namespace sofa::component::controller

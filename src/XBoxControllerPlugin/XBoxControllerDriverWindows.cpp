@@ -1,13 +1,6 @@
 #include <XBoxControllerPlugin/XBoxControllerDriverWindows.h>
 
-
-namespace sofa
-{
-
-namespace component
-{
-
-namespace controller
+namespace sofa::component::controller
 {
 
 XBoxControllerDriverWindows::XBoxControllerDriverWindows()
@@ -107,8 +100,4 @@ void XBoxControllerDriverWindows::rumble(int leftMotorValue, int rightMotorValue
     XInputSetState(this->getControllerNumber(), &vibration);
 }
 
-} // namespace controller
-
-} // namespace component
-
-} // namespace sofa
+} // namespace sofa::component::controller

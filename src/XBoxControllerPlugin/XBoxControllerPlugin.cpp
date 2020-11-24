@@ -1,12 +1,7 @@
-
 #include <XBoxControllerPlugin/config.h>
+#include <sofa/core/ObjectFactory.h>
 
-#include <iostream>
-
-namespace sofa
-{
-
-namespace component
+namespace sofa::component
 {
 
 //Here are just several convenient functions to help user to know what contains the plugin
@@ -32,12 +27,12 @@ void initExternalModule()
 
 const char* getModuleName()
 {
-    return "XBoxControllerPlugin";
+    return sofa_tostring(SOFA_TARGET);
 }
 
 const char* getModuleVersion()
 {
-    return "0.1";
+    return sofa_tostring(XBOXCONTROLLERPLUGIN_VERSION);
 }
 
 const char* getModuleLicense()
@@ -53,17 +48,8 @@ const char* getModuleDescription()
 
 const char* getModuleComponentList()
 {
-    /// string containing the names of the classes provided by the plugin
-    return "XBoxControllerDriver";
+    static std::string classes = sofa::core::ObjectFactory::getInstance()->listClassesFromTarget(sofa_tostring(SOFA_TARGET));
+    return classes.c_str();
 }
 
-
-
-}
-
-}
-
-/// Use the SOFA_LINK_CLASS macro for each class, to enable linking on all platforms
-//SOFA_LINK_CLASS(XBoxControllerDriver)
-
-
+} // namespace sofa::component

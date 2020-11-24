@@ -1,6 +1,4 @@
-#ifndef XBOXCONTROLLERDRIVERWINDOWS_H
-#define XBOXCONTROLLERDRIVERWINDOWS_H
-
+#pragma once
 #include <XBoxControllerPlugin/XBoxControllerDriver.h>
 
 #define WIN32_LEAN_AND_MEAN //reduce windows useless includes
@@ -8,13 +6,7 @@
 #include <windows.h>
 #include <Xinput.h>
 
-namespace sofa
-{
-
-namespace component
-{
-
-namespace controller
+namespace sofa::component::controller
 {
 
 class SOFA_XBOXCONTROLLERPLUGIN_API XBoxControllerDriverWindows : public AbstractXBoxControllerDriver
@@ -34,10 +26,4 @@ private:
     void convertXinputData(ControllerData& data, const XINPUT_STATE& controllerState);
 };
 
-} // namespace controller
-
-} // namespace component
-
-} // namespace sofa
-
-#endif // XBOXCONTROLLERDRIVERWINDOWS_H
+} // namespace sofa::component::controller

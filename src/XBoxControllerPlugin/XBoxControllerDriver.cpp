@@ -5,13 +5,7 @@
 
 #include <XBoxControllerPlugin/XBoxControllerDriverWindows.h>
 
-namespace sofa
-{
-
-namespace component
-{
-
-namespace controller
+namespace sofa::component::controller
 {
 
 SOFA_DECL_CLASS(XBoxControllerDriver)
@@ -134,8 +128,4 @@ void XBoxControllerDriver::handleEvent(sofa::core::objectmodel::Event* event)
     }
 }
 
-} // namespace controller
-
-} // namespace component
-
-} // namespace sofa
+} // namespace sofa::component::controller
