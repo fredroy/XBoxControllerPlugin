@@ -13,10 +13,10 @@ SOFA_DECL_CLASS(XBoxControllerDriver)
 void AbstractXBoxControllerDriver::ControllerData::print()
 {
     std::cout << "Buttons: " << std::endl;
-    std::cout << "A: " << ((this->buttonsState & BUTTON_A) ? "O" : "X") << " | "
-              << "B: " << ((this->buttonsState & BUTTON_B) ? "O" : "X") << " | "
-              << "X: " << ((this->buttonsState & BUTTON_X) ? "O" : "X") << " | "
-              << "Y: " << ((this->buttonsState & BUTTON_Y) ? "O" : "X") << " | "
+    std::cout << "A: " << ((this->buttonsState & Button::BUTTON_A) ? "O" : "X") << " | "
+              << "B: " << ((this->buttonsState & Button::BUTTON_B) ? "O" : "X") << " | "
+              << "X: " << ((this->buttonsState & Button::BUTTON_X) ? "O" : "X") << " | "
+              << "Y: " << ((this->buttonsState & Button::BUTTON_Y) ? "O" : "X") << " | "
               << std::endl;
 
     std::cout << "Triggers: " << std::endl;
@@ -47,10 +47,10 @@ XBoxControllerDriver::XBoxControllerDriver()
     , d_rightThumbY(initData(&d_rightThumbY, (short)0, "rightThumbY", "Right Stick Y value"))
     , d_leftTrigger(initData(&d_leftTrigger, (unsigned char)0, "leftTrigger", "Left Trigger value"))
     , d_rightTrigger(initData(&d_rightTrigger, (unsigned char)0, "rightTrigger", "Right Trigger value"))
-    , m_XBoxControllerDriverImpl(NULL)
+    , m_XBoxControllerDriverImpl(nullptr)
 {
     f_listening.setValue(true);
-    m_XBoxControllerDriverImpl = new XBoxControllerDriverWindows();
+    m_XBoxControllerDriverImpl = std::make_shared<XBoxControllerDriverWindows>();
 
     this->addAlias(&d_controllerNumber, "id");
     d_buttonA.setReadOnly(true);
@@ -89,10 +89,10 @@ void XBoxControllerDriver::init()
 
 void XBoxControllerDriver::fillData(const ControllerData& data)
 {
-    d_buttonA.setValue(data.buttonsState & ControllerData::BUTTON_A);
-    d_buttonB.setValue(data.buttonsState & ControllerData::BUTTON_B);
-    d_buttonX.setValue(data.buttonsState & ControllerData::BUTTON_X);
-    d_buttonY.setValue(data.buttonsState & ControllerData::BUTTON_Y);
+    d_buttonA.setValue(data.buttonsState & ControllerData::Button::BUTTON_A);
+    d_buttonB.setValue(data.buttonsState & ControllerData::Button::BUTTON_B);
+    d_buttonX.setValue(data.buttonsState & ControllerData::Button::BUTTON_X);
+    d_buttonY.setValue(data.buttonsState & ControllerData::Button::BUTTON_Y);
 
     d_leftThumbX.setValue(data.leftThumbX);
     d_leftThumbY.setValue(data.leftThumbY);

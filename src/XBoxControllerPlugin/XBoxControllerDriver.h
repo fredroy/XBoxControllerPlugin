@@ -12,12 +12,19 @@ namespace sofa::component::controller
 class AbstractXBoxControllerDriver
 {
 protected:
-    int m_controllerNumber;
+    unsigned int m_controllerNumber;
 
 public:
     struct ControllerData
     {
-        enum Button {BUTTON_NULL=0, BUTTON_A=1, BUTTON_B=2, BUTTON_X=4, BUTTON_Y=8};
+        enum Button
+        {
+            BUTTON_NULL=0, 
+            BUTTON_A=1, 
+            BUTTON_B=2, 
+            BUTTON_X=4, 
+            BUTTON_Y=8
+        };
 
         unsigned int buttonsState;
 
@@ -79,7 +86,7 @@ protected:
     void fillData(const ControllerData& data);
 
 private:
-    AbstractXBoxControllerDriver* m_XBoxControllerDriverImpl;
+    std::shared_ptr<AbstractXBoxControllerDriver> m_XBoxControllerDriverImpl;
 
 
 };
