@@ -1,6 +1,9 @@
 <Node name="root">
 
 	<RequiredPlugin pluginName="XBoxControllerPlugin" />
+	<RequiredPlugin pluginName="SofaOpenGlVisual" />
+	<RequiredPlugin pluginName="SofaPython" />
+	
     <VisualStyle displayFlags="showVisual" />
 
 	<Node name="Cube">
