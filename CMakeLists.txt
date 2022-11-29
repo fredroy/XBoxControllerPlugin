@@ -16,10 +16,10 @@ set(SOURCE_FILES
     ${XBOXCONTROLLERPLUGIN_SRC_DIR}/XBoxControllerDriver.cpp
 )
 
-find_package(SofaFramework REQUIRED)
+find_package(Sofa.Simulation.Core REQUIRED)
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} PUBLIC SofaCore SofaSimulationCore)
+target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Core Sofa.Simulation.Core)
 
 if(WIN32)
     target_link_libraries(${PROJECT_NAME} PUBLIC XInput )
