@@ -16,7 +16,7 @@ public:
     typedef Inherit::ControllerData ControllerData;
 
     XBoxControllerDriverWindows();
-    virtual ~XBoxControllerDriverWindows();
+    virtual ~XBoxControllerDriverWindows() = default;
 
     bool initController();
     bool getData(ControllerData& data);

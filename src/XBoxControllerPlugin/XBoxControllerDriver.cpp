@@ -10,24 +10,28 @@ namespace sofa::component::controller
 
 SOFA_DECL_CLASS(XBoxControllerDriver)
 
-void AbstractXBoxControllerDriver::ControllerData::print()
+std::ostream& operator<< (std::ostream& os, const AbstractXBoxControllerDriver::ControllerData& cd)
 {
-    std::cout << "Buttons: " << std::endl;
-    std::cout << "A: " << ((this->buttonsState & Button::BUTTON_A) ? "O" : "X") << " | "
-              << "B: " << ((this->buttonsState & Button::BUTTON_B) ? "O" : "X") << " | "
-              << "X: " << ((this->buttonsState & Button::BUTTON_X) ? "O" : "X") << " | "
-              << "Y: " << ((this->buttonsState & Button::BUTTON_Y) ? "O" : "X") << " | "
+    using Button = AbstractXBoxControllerDriver::ControllerData::Button;
+
+    os << "Buttons: " << std::endl;
+    os << "A: " << ((cd.buttonsState & Button::BUTTON_A) ? "O" : "X") << " | "
+              << "B: " << ((cd.buttonsState & Button::BUTTON_B) ? "O" : "X") << " | "
+              << "X: " << ((cd.buttonsState & Button::BUTTON_X) ? "O" : "X") << " | "
+              << "Y: " << ((cd.buttonsState & Button::BUTTON_Y) ? "O" : "X") << " | "
               << std::endl;
 
-    std::cout << "Triggers: " << std::endl;
-    std::cout << "Left: " << +this->leftTrigger << " | "
-              << "Right: " << +this->rightTrigger
+    os << "Triggers: " << std::endl;
+    os << "Left: " << +cd.leftTrigger << " | "
+              << "Right: " << +cd.rightTrigger
               << std::endl;
 
-    std::cout << "Thumbs: " << std::endl;
-    std::cout << "Left: " << this->leftThumbX << "," << this->leftThumbY << " | "
-              << "Right: " << this->rightThumbX << "," << this->rightThumbY
+    os << "Thumbs: " << std::endl;
+    os << "Left: " << cd.leftThumbX << "," << cd.leftThumbY << " | "
+              << "Right: " << cd.rightThumbX << "," << cd.rightThumbY
               << std::endl;
+
+    return os;
 }
 
 
@@ -65,25 +69,21 @@ XBoxControllerDriver::XBoxControllerDriver()
     d_rightTrigger.setReadOnly(true);
 }
 
-XBoxControllerDriver::~XBoxControllerDriver()
-{
-
-}
-
 void XBoxControllerDriver::init()
 {
-    if (m_XBoxControllerDriverImpl != NULL)
-    {
-        m_XBoxControllerDriverImpl->setControllerNumber(d_controllerNumber.getValue());
+    assert(m_XBoxControllerDriverImpl);
 
-        if (m_XBoxControllerDriverImpl->initController())
-        {
-            msg_info("XBoxControllerDriver::init") << "Correctly initialized.";
-        }
-        else
-        {
-            msg_error("XBoxControllerDriver::init") << "Error while initializing.";
-        }
+    m_XBoxControllerDriverImpl->setControllerNumber(d_controllerNumber.getValue());
+
+    if (m_XBoxControllerDriverImpl->initController())
+    {
+        msg_info("XBoxControllerDriver::init") << "Correctly initialized.";
+        d_componentState.setValue(sofa::core::objectmodel::ComponentState::Valid);
+    }
+    else
+    {
+        msg_error("XBoxControllerDriver::init") << "Error while initializing.";
+        d_componentState.setValue(sofa::core::objectmodel::ComponentState::Invalid);
     }
 }
 
@@ -107,14 +107,15 @@ void XBoxControllerDriver::handleEvent(sofa::core::objectmodel::Event* event)
 {
     if (sofa::simulation::AnimateBeginEvent::checkEventType(event))
     {
-        ControllerData data;
-        if (m_XBoxControllerDriverImpl != NULL)
+        if (this->isComponentStateValid())
         {
+            ControllerData data;
+            assert(m_XBoxControllerDriverImpl);
+
             m_XBoxControllerDriverImpl->getData(data);
             this->fillData(data);
 
-            if(f_printLog.getValue())
-                data.print();
+            msg_info() << data;
 
             //if (data.buttonsState & ControllerData::BUTTON_X)
             //    m_XBoxControllerDriverImpl->rumble(10000, 0);
@@ -124,6 +125,7 @@ void XBoxControllerDriver::handleEvent(sofa::core::objectmodel::Event* event)
             //    m_XBoxControllerDriverImpl->rumble(0, 0);
             //if (data.buttonsState & ControllerData::BUTTON_A)
             //    m_XBoxControllerDriverImpl->rumble(10000, 10000);
+
         }
     }
 }

@@ -8,10 +8,6 @@ XBoxControllerDriverWindows::XBoxControllerDriverWindows()
 {
 
 }
-XBoxControllerDriverWindows::~XBoxControllerDriverWindows()
-{
-
-}
 
 bool XBoxControllerDriverWindows::getData(ControllerData& data)
 {

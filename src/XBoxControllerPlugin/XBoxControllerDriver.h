@@ -36,7 +36,7 @@ public:
         short rightThumbX;
         short rightThumbY;
 
-        void print();
+        SOFA_XBOXCONTROLLERPLUGIN_API friend std::ostream& operator<<(std::ostream& o, const ControllerData& c);
 
     };
 
@@ -58,7 +58,6 @@ public:
     typedef AbstractXBoxControllerDriver::ControllerData ControllerData;
 
     void init();
-    void update() {}
     void handleEvent(sofa::core::objectmodel::Event* event);
 
     Data<int> d_controllerNumber;
@@ -81,7 +80,7 @@ protected:
     /** Default constructor
     */
     XBoxControllerDriver();
-    virtual ~XBoxControllerDriver();
+    virtual ~XBoxControllerDriver() = default;
 
     void fillData(const ControllerData& data);
 
